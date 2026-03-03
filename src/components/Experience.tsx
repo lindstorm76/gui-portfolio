@@ -185,7 +185,7 @@ function Experience() {
   return (
     <Section id="experience">
       <Title>
-        Professional <Highlight>Experience</Highlight>
+        <Highlight>03.</Highlight> Professional Experience
       </Title>
       <List>
         {EXPERIENCES.map((exp) => (

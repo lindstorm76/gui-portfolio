@@ -197,9 +197,9 @@ const Name = styled.span`
 
 function Stack() {
   return (
-    <Section id="skills">
+    <Section id="expertise">
       <Title>
-        The <Highlight>Stack</Highlight>
+        <Highlight>02.</Highlight> My Expertise
       </Title>
       <Groups>
         {STACKS.map((group) => (

@@ -17,10 +17,13 @@ const Section = styled.section`
   }
 `;
 
+const Highlight = styled.span`
+  color: ${({ theme }) => theme.colors.lavender};
+`;
+
 const Title = styled.h2`
   font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile["3xl"]};
-  color: ${({ theme }) => theme.colors.lavender};
   font-weight: 700;
   text-align: center;
 
@@ -86,7 +89,9 @@ function Contact() {
   return (
     <Section id="contact">
       <Card>
-        <Title>Get In Touch</Title>
+        <Title>
+          <Highlight>05.</Highlight> Get In Touch
+        </Title>
         <Message>
           My inbox is always open. Whether you have a question, an opportunity,
           or just want to say hi — I'll do my best to get back to you.

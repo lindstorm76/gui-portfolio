@@ -1,22 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const NAV_LINKS = [
-  { label: "About", href: "#about" },
+  { label: "About", href: "#" },
+  { label: "Expertise", href: "#expertise" },
   { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
 
-const Nav = styled.nav`
+const Nav = styled.nav<{ $scrolled: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 200;
-  background-color: ${({ theme }) => theme.colors.base};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.surface0};
+  background-color: ${({ theme }) => theme.colors.base}80;
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid
+    ${({ theme, $scrolled }) =>
+      $scrolled ? theme.colors.surface0 : "transparent"};
+  transition: border-color 0.2s ease;
 `;
 
 const Inner = styled.div`
@@ -31,6 +36,7 @@ const Inner = styled.div`
 `;
 
 const Brand = styled.p`
+  cursor: default;
   font-size: ${({ theme }) => theme.fontSizes.mobile.lg};
   font-weight: 700;
   color: ${({ theme }) => theme.colors.text};
@@ -164,14 +170,32 @@ const NavLink = styled.a`
   }
 `;
 
+const NavLinkIndex = styled.span`
+  color: ${({ theme }) => theme.colors.lavender};
+`;
+
+function handleNavClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+  if (href === "#") {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 0);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
-      <Nav>
+      <Nav $scrolled={scrolled}>
         <Inner>
-          <Brand>Portfolio</Brand>
+          <Brand>Thanapong Angkha</Brand>
           <HamburgerButton
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? "Close menu" : "Open menu"}
@@ -201,9 +225,14 @@ function Navbar() {
             </IconWrap>
           </HamburgerButton>
           <DesktopLinks>
-            {NAV_LINKS.map(({ label, href }) => (
+            {NAV_LINKS.map(({ label, href }, index) => (
               <li key={label}>
-                <NavLink href={href}>{label}</NavLink>
+                <NavLink href={href} onClick={(e) => handleNavClick(e, href)}>
+                  <NavLinkIndex>
+                    {String(index + 1).padStart(2, "0")}.{" "}
+                  </NavLinkIndex>
+                  <span>{label}</span>
+                </NavLink>
               </li>
             ))}
           </DesktopLinks>
@@ -214,10 +243,19 @@ function Navbar() {
 
       <MobileMenu $open={open}>
         <MobileLinks>
-          {NAV_LINKS.map(({ label, href }) => (
+          {NAV_LINKS.map(({ label, href }, index) => (
             <li key={label}>
-              <MobileNavLink href={href} onClick={() => setOpen(false)}>
-                {label}
+              <MobileNavLink
+                href={href}
+                onClick={(e) => {
+                  handleNavClick(e, href);
+                  setOpen(false);
+                }}
+              >
+                <NavLinkIndex>
+                  {String(index + 1).padStart(2, "0")}.{" "}
+                </NavLinkIndex>
+                <span>{label}</span>
               </MobileNavLink>
             </li>
           ))}
