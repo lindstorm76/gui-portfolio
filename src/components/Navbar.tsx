@@ -9,71 +9,6 @@ const NAV_LINKS = [
   { label: "Contact", href: "#contact" },
 ];
 
-function Navbar() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <Nav>
-        <Inner>
-          <Brand>Portfolio</Brand>
-          <HamburgerButton
-            onClick={() => setOpen((o) => !o)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-          >
-            <IconWrap $visible={!open}>
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                width="1.75em"
-                height="1.75em"
-                aria-hidden="true"
-              >
-                <path d="M4 5a1 1 0 0 0 0 2h16a1 1 0 1 0 0-2H4zM3 12a1 1 0 0 1 1-1h16a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1zM3 18a1 1 0 0 1 1-1h16a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1z" />
-              </svg>
-            </IconWrap>
-            <IconWrap $visible={open}>
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                width="1.75em"
-                height="1.75em"
-                aria-hidden="true"
-              >
-                <path d="M5.293 5.293a1 1 0 0 1 1.414 0L12 10.586l5.293-5.293a1 1 0 1 1 1.414 1.414L13.414 12l5.293 5.293a1 1 0 0 1-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L10.586 12 5.293 6.707a1 1 0 0 1 0-1.414z" />
-              </svg>
-            </IconWrap>
-          </HamburgerButton>
-          <DesktopLinks>
-            {NAV_LINKS.map(({ label, href }) => (
-              <li key={label}>
-                <NavLink href={href}>{label}</NavLink>
-              </li>
-            ))}
-          </DesktopLinks>
-        </Inner>
-      </Nav>
-
-      <MobileOverlay $open={open} onClick={() => setOpen(false)} />
-
-      <MobileMenu $open={open}>
-        <MobileLinks>
-          {NAV_LINKS.map(({ label, href }) => (
-            <li key={label}>
-              <MobileNavLink href={href} onClick={() => setOpen(false)}>
-                {label}
-              </MobileNavLink>
-            </li>
-          ))}
-        </MobileLinks>
-      </MobileMenu>
-    </>
-  );
-}
-
-export default Navbar;
-
 const Nav = styled.nav`
   position: fixed;
   top: 0;
@@ -183,7 +118,7 @@ const MobileLinks = styled.ul`
 const MobileNavLink = styled.a`
   display: block;
   padding: ${({ theme }) => `${theme.spacing[3]} ${theme.spacing[4]}`};
-  color: ${({ theme }) => theme.colors.subtext1};
+  color: ${({ theme }) => theme.colors.text};
   font-size: ${({ theme }) => theme.fontSizes.mobile["2xl"]};
   font-weight: 600;
   font-family: ${({ theme }) => theme.fonts.header};
@@ -191,11 +126,6 @@ const MobileNavLink = styled.a`
   transition:
     background-color 0.15s ease,
     color 0.15s ease;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.surface0};
-    color: ${({ theme }) => theme.colors.text};
-  }
 `;
 
 const DesktopLinks = styled.ul`
@@ -214,7 +144,7 @@ const DesktopLinks = styled.ul`
 const NavLink = styled.a`
   display: block;
   padding: ${({ theme }) => `${theme.spacing[1]} ${theme.spacing[3]}`};
-  color: ${({ theme }) => theme.colors.subtext1};
+  color: ${({ theme }) => theme.colors.text};
   font-size: ${({ theme }) => theme.fontSizes.mobile.sm};
   border: 1px solid transparent;
 
@@ -233,3 +163,68 @@ const NavLink = styled.a`
     font-size: ${({ theme }) => theme.fontSizes.desktop.sm};
   }
 `;
+
+function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Nav>
+        <Inner>
+          <Brand>Portfolio</Brand>
+          <HamburgerButton
+            onClick={() => setOpen((o) => !o)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
+            <IconWrap $visible={!open}>
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                width="1.75em"
+                height="1.75em"
+                aria-hidden="true"
+              >
+                <path d="M4 5a1 1 0 0 0 0 2h16a1 1 0 1 0 0-2H4zM3 12a1 1 0 0 1 1-1h16a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1zM3 18a1 1 0 0 1 1-1h16a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1z" />
+              </svg>
+            </IconWrap>
+            <IconWrap $visible={open}>
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                width="1.75em"
+                height="1.75em"
+                aria-hidden="true"
+              >
+                <path d="M5.293 5.293a1 1 0 0 1 1.414 0L12 10.586l5.293-5.293a1 1 0 1 1 1.414 1.414L13.414 12l5.293 5.293a1 1 0 0 1-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L10.586 12 5.293 6.707a1 1 0 0 1 0-1.414z" />
+              </svg>
+            </IconWrap>
+          </HamburgerButton>
+          <DesktopLinks>
+            {NAV_LINKS.map(({ label, href }) => (
+              <li key={label}>
+                <NavLink href={href}>{label}</NavLink>
+              </li>
+            ))}
+          </DesktopLinks>
+        </Inner>
+      </Nav>
+
+      <MobileOverlay $open={open} onClick={() => setOpen(false)} />
+
+      <MobileMenu $open={open}>
+        <MobileLinks>
+          {NAV_LINKS.map(({ label, href }) => (
+            <li key={label}>
+              <MobileNavLink href={href} onClick={() => setOpen(false)}>
+                {label}
+              </MobileNavLink>
+            </li>
+          ))}
+        </MobileLinks>
+      </MobileMenu>
+    </>
+  );
+}
+
+export default Navbar;
