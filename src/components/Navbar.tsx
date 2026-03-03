@@ -98,7 +98,7 @@ const Inner = styled.div`
 const Brand = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.mobile.lg};
   font-weight: 700;
-  color: ${({ theme }) => theme.colors.lavender};
+  color: ${({ theme }) => theme.colors.text};
   letter-spacing: -0.01em;
   position: relative;
   z-index: 201;

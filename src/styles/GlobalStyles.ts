@@ -28,7 +28,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   a {
-    color: ${({ theme }) => theme.colors.mauve};
+    color: ${({ theme }) => theme.colors.lavender};
     text-decoration: none;
 
     &:hover {
@@ -41,7 +41,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ::selection {
-    background-color: ${({ theme }) => theme.colors.mauve};
+    background-color: ${({ theme }) => theme.colors.lavender};
     color: ${({ theme }) => theme.colors.base};
   }
 `;
