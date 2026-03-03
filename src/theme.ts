@@ -1,0 +1,71 @@
+const theme = {
+  colors: {
+    // Catppuccin Macchiato
+    rosewater: '#f4dbd6',
+    flamingo: '#f0c6c6',
+    pink: '#f5bde6',
+    mauve: '#c6a0f6',
+    red: '#ed8796',
+    maroon: '#ee99a0',
+    peach: '#f5a97f',
+    yellow: '#eed49f',
+    green: '#a6da95',
+    teal: '#8bd5ca',
+    sky: '#91d7e3',
+    sapphire: '#7dc4e4',
+    blue: '#8aadf4',
+    lavender: '#b7bdf8',
+
+    text: '#cad3f5',
+    subtext1: '#b8c0e0',
+    subtext0: '#a5adcb',
+    overlay2: '#939ab7',
+    overlay1: '#8087a2',
+    overlay0: '#6e738d',
+
+    surface2: '#5b6078',
+    surface1: '#494d64',
+    surface0: '#363a4f',
+    base: '#24273a',
+    mantle: '#1e2030',
+    crust: '#181926',
+  },
+  fonts: {
+    sans: 'system-ui, Avenir, Helvetica, Arial, sans-serif',
+    mono: "'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace",
+  },
+  fontSizes: {
+    xs: '0.75rem',
+    sm: '0.875rem',
+    md: '1rem',
+    lg: '1.125rem',
+    xl: '1.25rem',
+    '2xl': '1.5rem',
+    '3xl': '1.875rem',
+    '4xl': '2.25rem',
+  },
+  spacing: {
+    1: '0.25rem',
+    2: '0.5rem',
+    3: '0.75rem',
+    4: '1rem',
+    5: '1.25rem',
+    6: '1.5rem',
+    8: '2rem',
+    10: '2.5rem',
+    12: '3rem',
+    16: '4rem',
+    20: '5rem',
+    24: '6rem',
+  },
+  radii: {
+    sm: '4px',
+    md: '8px',
+    lg: '12px',
+    xl: '16px',
+    full: '9999px',
+  },
+} as const
+
+export type Theme = typeof theme
+export default theme
