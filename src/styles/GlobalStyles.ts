@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
   *, *::before, *::after {
@@ -16,7 +16,11 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: ${({ theme }) => theme.fonts.sans};
-    font-size: ${({ theme }) => theme.fontSizes.md};
+    font-size: ${({ theme }) => theme.fontSizes.mobile.md};
+
+    @media (min-width: 768px) {
+      font-size: ${({ theme }) => theme.fontSizes.desktop.md};
+    }
     line-height: 1.5;
     background-color: ${({ theme }) => theme.colors.base};
     color: ${({ theme }) => theme.colors.text};
@@ -24,7 +28,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   a {
-    color: ${({ theme }) => theme.colors.blue};
+    color: ${({ theme }) => theme.colors.mauve};
     text-decoration: none;
 
     &:hover {
@@ -40,6 +44,6 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.mauve};
     color: ${({ theme }) => theme.colors.base};
   }
-`
+`;
 
-export default GlobalStyles
+export default GlobalStyles;
