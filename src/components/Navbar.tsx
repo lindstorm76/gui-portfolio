@@ -37,7 +37,7 @@ const Brand = styled.p`
   letter-spacing: -0.01em;
   position: relative;
   z-index: 201;
-  font-family: ${({ theme }) => theme.fonts.header};
+  font-family: ${({ theme }) => theme.fonts.mono};
 
   @media (min-width: 768px) {
     font-size: ${({ theme }) => theme.fontSizes.desktop.lg};
@@ -121,7 +121,7 @@ const MobileNavLink = styled.a`
   color: ${({ theme }) => theme.colors.text};
   font-size: ${({ theme }) => theme.fontSizes.mobile["2xl"]};
   font-weight: 600;
-  font-family: ${({ theme }) => theme.fonts.header};
+  font-family: ${({ theme }) => theme.fonts.mono};
   border-radius: ${({ theme }) => theme.radii.md};
   transition:
     background-color 0.15s ease,
@@ -134,7 +134,7 @@ const DesktopLinks = styled.ul`
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing[2]};
   font-weight: 600;
-  font-family: ${({ theme }) => theme.fonts.header};
+  font-family: ${({ theme }) => theme.fonts.mono};
 
   @media (min-width: 768px) {
     display: flex;

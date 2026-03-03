@@ -31,9 +31,8 @@ const theme = {
     crust: "#dce0e8",
   },
   fonts: {
-    sans: "system-ui, Avenir, Helvetica, Arial, sans-serif",
-    mono: "'Martian Mono', 'Cascadia Code', 'Fira Code', monospace",
-    header: "'Space Mono', system-ui",
+    sans: "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
+    mono: "'Space Mono', 'Cascadia Code', 'Fira Code', monospace",
   },
   fontSizes: {
     mobile: {

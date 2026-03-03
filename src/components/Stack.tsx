@@ -92,19 +92,11 @@ const STACKS: StackGroup[] = [
 ];
 
 const Section = styled.section`
-  padding: ${({ theme }) => `${theme.spacing[12]} 0`};
-
-  @media (min-width: 768px) {
-    padding: ${({ theme }) => `${theme.spacing[16]} 0`};
-  }
-
-  @media (min-width: 1280px) {
-    padding: ${({ theme }) => `${theme.spacing[20]} 0`};
-  }
+  padding: ${({ theme }) => `${theme.spacing[20]} 0`};
 `;
 
 const Title = styled.h2`
-  font-family: ${({ theme }) => theme.fonts.header};
+  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile["3xl"]};
   color: ${({ theme }) => theme.colors.text};
   font-weight: 700;
@@ -133,7 +125,7 @@ const CategoryGroup = styled.div`
 `;
 
 const CategoryLabel = styled.h3`
-  font-family: ${({ theme }) => theme.fonts.header};
+  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile.md};
   color: ${({ theme }) => theme.colors.text};
   letter-spacing: 0.08em;

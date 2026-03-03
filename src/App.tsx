@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
 import Stack from "./components/Stack";
 import Contact from "./components/Contact";
 import Socials from "./components/Socials";
@@ -22,6 +23,7 @@ function App() {
     <>
       <Navbar />
       <Main>
+        <Hero />
         <Stack />
         <Contact />
       </Main>

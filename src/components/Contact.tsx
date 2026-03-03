@@ -18,7 +18,7 @@ const Section = styled.section`
 `;
 
 const Title = styled.h2`
-  font-family: ${({ theme }) => theme.fonts.header};
+  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile["3xl"]};
   color: ${({ theme }) => theme.colors.lavender};
   font-weight: 700;
@@ -61,7 +61,7 @@ const Message = styled.p`
 const Button = styled.a`
   display: inline-block;
   padding: ${({ theme }) => `${theme.spacing[3]} ${theme.spacing[8]}`};
-  font-family: ${({ theme }) => theme.fonts.header};
+  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile.sm};
   font-weight: 700;
   color: ${({ theme }) => theme.colors.text};
