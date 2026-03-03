@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Stack from "./components/Stack";
+import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import Socials from "./components/Socials";
 import Email from "./components/Email";
@@ -25,6 +26,7 @@ function App() {
       <Main>
         <Hero />
         <Stack />
+        <Experience />
         <Contact />
       </Main>
       <Socials />
