@@ -1,6 +1,28 @@
 import { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 
+const fadeUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const arrowFadeUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+`;
+
 const Section = styled.section`
   text-align: center;
   position: relative;
@@ -21,6 +43,8 @@ const Name = styled.h1`
   color: ${({ theme }) => theme.colors.text};
   font-weight: 700;
   line-height: 1.05;
+  animation: ${fadeUp} 0.6s ease both;
+  animation-delay: 0.1s;
 `;
 
 const Role = styled.p`
@@ -31,6 +55,8 @@ const Role = styled.p`
   align-items: center;
   justify-content: center;
   min-height: 1.5em;
+  animation: ${fadeUp} 0.6s ease both;
+  animation-delay: 0.3s;
 `;
 
 const blink = keyframes`
@@ -59,7 +85,9 @@ const ArrowWrapper = styled.div`
   cursor: pointer;
   left: 50%;
   bottom: ${({ theme }) => theme.spacing[12]};
-  animation: ${bounceDown} 1.6s ease-in-out infinite;
+  animation:
+    ${arrowFadeUp} 0.6s ease 0.7s both,
+    ${bounceDown} 1.6s ease-in-out 1.3s infinite;
 
   @media (max-height: 500px) {
     bottom: 0px;
@@ -71,6 +99,8 @@ const Tagline = styled.p`
   color: ${({ theme }) => theme.colors.subtext1};
   max-width: 560px;
   line-height: 1.7;
+  animation: ${fadeUp} 0.6s ease both;
+  animation-delay: 0.5s;
 
   @media (min-width: 768px) {
     font-size: ${({ theme }) => theme.fontSizes.desktop.lg};
