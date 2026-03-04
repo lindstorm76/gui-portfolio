@@ -124,12 +124,12 @@ const CategoryGroup = styled.div`
 `;
 
 const CategoryLabel = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.mobile.md};
+  font-size: ${({ theme }) => theme.fontSizes.mobile.xl};
   color: ${({ theme }) => theme.colors.text};
   letter-spacing: 0.08em;
 
   @media (min-width: 768px) {
-    font-size: ${({ theme }) => theme.fontSizes.desktop.md};
+    font-size: ${({ theme }) => theme.fontSizes.desktop.lg};
   }
 `;
 
@@ -188,7 +188,7 @@ const AbbrBox = styled.div`
 
 const Name = styled.span`
   font-weight: 600;
-  font-size: ${({ theme }) => theme.fontSizes.mobile.sm};
+  font-size: ${({ theme }) => theme.fontSizes.mobile.md};
   color: #000;
 `;
 
