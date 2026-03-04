@@ -4,6 +4,7 @@ import { Typewriter } from "./Typewriter";
 
 interface StackItem {
   name: string;
+  url: string;
   icon?: string;
   abbr?: string;
 }
@@ -21,49 +22,90 @@ const STACKS: StackGroup[] = [
     items: [
       {
         name: "TypeScript",
-        icon: `https://cdn.simpleicons.org/typescript/4c4f69`,
+        url: "https://www.typescriptlang.org",
+        icon: `https://cdn.simpleicons.org/typescript`,
       },
       {
         name: "JavaScript",
-        icon: `https://cdn.simpleicons.org/javascript/4c4f69`,
+        url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+        icon: `https://cdn.simpleicons.org/javascript`,
       },
-      { name: "Go", icon: `https://cdn.simpleicons.org/go/4c4f69` },
-      { name: "Python", icon: `https://cdn.simpleicons.org/python/4c4f69` },
-      { name: "Dart", icon: `https://cdn.simpleicons.org/dart/4c4f69` },
+      {
+        name: "Go",
+        url: "https://go.dev",
+        icon: `https://cdn.simpleicons.org/go`,
+      },
+      {
+        name: "Python",
+        url: "https://www.python.org",
+        icon: `https://cdn.simpleicons.org/python`,
+      },
+      {
+        name: "Dart",
+        url: "https://dart.dev",
+        icon: `https://cdn.simpleicons.org/dart`,
+      },
     ],
   },
   {
     category: "Frontend",
     items: [
-      { name: "React", icon: `https://cdn.simpleicons.org/react/4c4f69` },
-      { name: "Vue.js", icon: `https://cdn.simpleicons.org/vuedotjs/4c4f69` },
+      {
+        name: "React",
+        url: "https://react.dev",
+        icon: `https://cdn.simpleicons.org/react`,
+      },
+      {
+        name: "Vue.js",
+        url: "https://vuejs.org",
+        icon: `https://cdn.simpleicons.org/vuedotjs`,
+      },
       {
         name: "AngularJS",
-        icon: `https://cdn.simpleicons.org/angular/4c4f69`,
+        url: "https://angular.dev",
+        icon: `https://cdn.simpleicons.org/angular`,
       },
     ],
   },
   {
     category: "Backend/APIs",
     items: [
-      { name: "Node.js", icon: `https://cdn.simpleicons.org/nodedotjs/4c4f69` },
-      { name: "NestJS", icon: `https://cdn.simpleicons.org/nestjs/4c4f69` },
+      {
+        name: "Node.js",
+        url: "https://nodejs.org",
+        icon: `https://cdn.simpleicons.org/nodedotjs`,
+      },
+      {
+        name: "NestJS",
+        url: "https://nestjs.com",
+        icon: `https://cdn.simpleicons.org/nestjs`,
+      },
       {
         name: "Express.js",
-        icon: `https://cdn.simpleicons.org/express/4c4f69`,
+        url: "https://expressjs.com",
+        icon: `https://cdn.simpleicons.org/express`,
       },
-      { name: "gRPC", abbr: "gRPC" },
-      { name: "GraphQL", icon: `https://cdn.simpleicons.org/graphql/4c4f69` },
-      { name: "REST", abbr: "REST" },
+      { name: "gRPC", url: "https://grpc.io", abbr: "gRPC" },
+      {
+        name: "GraphQL",
+        url: "https://graphql.org",
+        icon: `https://cdn.simpleicons.org/graphql`,
+      },
+      { name: "REST", url: "https://restfulapi.net", abbr: "REST" },
     ],
   },
   {
     category: "Mobile",
     items: [
-      { name: "Flutter", icon: `https://cdn.simpleicons.org/flutter/4c4f69` },
+      {
+        name: "Flutter",
+        url: "https://flutter.dev",
+        icon: `https://cdn.simpleicons.org/flutter`,
+      },
       {
         name: "React Native",
-        icon: `https://cdn.simpleicons.org/react/4c4f69`,
+        url: "https://reactnative.dev",
+        icon: `https://cdn.simpleicons.org/react`,
       },
     ],
   },
@@ -72,11 +114,20 @@ const STACKS: StackGroup[] = [
     items: [
       {
         name: "Apache Airflow",
-        icon: `https://cdn.simpleicons.org/apacheairflow/4c4f69`,
+        url: "https://airflow.apache.org",
+        icon: `https://cdn.simpleicons.org/apacheairflow`,
       },
-      { name: "AWS", abbr: "AWS" },
-      { name: "GCP", icon: `https://cdn.simpleicons.org/googlecloud/4c4f69` },
-      { name: "Docker", icon: `https://cdn.simpleicons.org/docker/4c4f69` },
+      { name: "AWS", url: "https://aws.amazon.com", abbr: "AWS" },
+      {
+        name: "GCP",
+        url: "https://cloud.google.com",
+        icon: `https://cdn.simpleicons.org/googlecloud`,
+      },
+      {
+        name: "Docker",
+        url: "https://www.docker.com",
+        icon: `https://cdn.simpleicons.org/docker`,
+      },
     ],
   },
   {
@@ -84,13 +135,30 @@ const STACKS: StackGroup[] = [
     items: [
       {
         name: "PostgreSQL",
-        icon: `https://cdn.simpleicons.org/postgresql/4c4f69`,
+        url: "https://www.postgresql.org",
+        icon: `https://cdn.simpleicons.org/postgresql`,
       },
-      { name: "SQL Server", abbr: "MSSQL" },
-      { name: "Oracle", abbr: "ORA" },
-      { name: "MySQL", icon: `https://cdn.simpleicons.org/mysql/4c4f69` },
-      { name: "MongoDB", icon: `https://cdn.simpleicons.org/mongodb/4c4f69` },
-      { name: "Redis", icon: `https://cdn.simpleicons.org/redis/4c4f69` },
+      {
+        name: "SQL Server",
+        url: "https://www.microsoft.com/en-us/sql-server",
+        abbr: "MSSQL",
+      },
+      { name: "Oracle", url: "https://www.oracle.com/database", abbr: "ORA" },
+      {
+        name: "MySQL",
+        url: "https://www.mysql.com",
+        icon: `https://cdn.simpleicons.org/mysql`,
+      },
+      {
+        name: "MongoDB",
+        url: "https://www.mongodb.com",
+        icon: `https://cdn.simpleicons.org/mongodb`,
+      },
+      {
+        name: "Redis",
+        url: "https://redis.io",
+        icon: `https://cdn.simpleicons.org/redis`,
+      },
     ],
   },
 ];
@@ -188,17 +256,44 @@ const Grid = styled.div`
   }
 `;
 
-const Card = styled.div<{ $delay: number; $visible: boolean }>`
+const Card = styled.a<{ $delay: number; $visible: boolean }>`
   display: grid;
   grid-template-columns: 36px 1fr;
   gap: ${({ theme }) => theme.spacing[3]};
   align-items: center;
   padding: ${({ theme }) => `${theme.spacing[3]} ${theme.spacing[4]}`};
-  border: 1px solid transparent;
   border-radius: 0;
-  cursor: default;
-  transition: border-color 0.1s ease;
   opacity: 0;
+  cursor: pointer;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    transform: translate(-50%, -50%) scale(0.95);
+    transition:
+      border-color 0.1s ease,
+      transform 0.2s ease;
+  }
+
+  &:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    border: 2px solid ${({ theme }) => theme.colors.crust};
+  }
+
+  @media (min-width: 768px) {
+    filter: grayscale(1);
+    transition: filter 0.15s ease;
+
+    &:hover {
+      filter: grayscale(0);
+    }
+  }
 
   ${({ $visible, $delay }) =>
     $visible &&
@@ -256,6 +351,9 @@ function StackGroupSection({ group }: { group: StackGroup }) {
         {group.items.map((item, i) => (
           <Card
             key={item.name}
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
             $delay={i * TECH_STACK_CARD_DELAY}
             $visible={visible}
           >
