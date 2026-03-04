@@ -38,15 +38,11 @@ const Card = styled.div`
   align-items: center;
   gap: ${({ theme }) => theme.spacing[8]};
   padding: ${({ theme }) => theme.spacing[10]};
-  border: 2px solid ${({ theme }) => theme.colors.subtext1};
-  box-shadow: 8px 8px 0px 0px ${({ theme }) => theme.colors.subtext1};
   max-width: 480px;
   width: 100%;
 
   @media (min-width: 768px) {
     max-width: 560px;
-    border: 4px solid ${({ theme }) => theme.colors.subtext1};
-    box-shadow: 12px 12px 0px 0px ${({ theme }) => theme.colors.subtext1};
   }
 `;
 
