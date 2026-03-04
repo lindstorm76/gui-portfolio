@@ -44,6 +44,7 @@ const Brand = styled.p`
   position: relative;
   z-index: 201;
   font-family: ${({ theme }) => theme.fonts.mono};
+  margin-bottom: calc(${({ theme }) => theme.spacing[1]} + 1px);
 
   @media (min-width: 768px) {
     font-size: ${({ theme }) => theme.fontSizes.desktop.lg};
@@ -145,6 +146,10 @@ const DesktopLinks = styled.ul`
   @media (min-width: 768px) {
     display: flex;
   }
+
+  @media (max-height: 500px) {
+    gap: ${({ theme }) => theme.spacing[1]};
+  }
 `;
 
 const NavLink = styled.a`
@@ -195,7 +200,7 @@ function Navbar() {
     <>
       <Nav $scrolled={scrolled}>
         <Inner>
-          <Brand>Thanapong Angkha</Brand>
+          <Brand>thanapong.dev</Brand>
           <HamburgerButton
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? "Close menu" : "Open menu"}

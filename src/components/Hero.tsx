@@ -10,6 +10,10 @@ const Section = styled.section`
   justify-content: center;
   align-items: center;
   gap: ${({ theme }) => theme.spacing[6]};
+
+  @media (min-width: 768px) and (min-height: 500px) {
+    gap: ${({ theme }) => theme.spacing[10]};
+  }
 `;
 
 const Name = styled.h1`
@@ -58,6 +62,10 @@ const ArrowWrapper = styled.div`
   left: 50%;
   bottom: ${({ theme }) => theme.spacing[12]};
   animation: ${bounceDown} 1.6s ease-in-out infinite;
+
+  @media (max-height: 500px) {
+    bottom: 0px;
+  }
 `;
 
 const Tagline = styled.p`
@@ -137,7 +145,7 @@ function Hero() {
       <ArrowWrapper
         onClick={() =>
           document
-            .getElementById("skills")
+            .getElementById("expertise")
             ?.scrollIntoView({ behavior: "smooth" })
         }
       >
