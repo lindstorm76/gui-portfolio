@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Typewriter } from "./Typewriter";
 
 interface StackItem {
   name: string;
@@ -199,9 +200,11 @@ function Stack() {
         <Highlight>02.</Highlight> My Expertise
       </Title>
       <Groups>
-        {STACKS.map((group) => (
+        {STACKS.map((group, i) => (
           <CategoryGroup key={group.category}>
-            <CategoryLabel>{group.category}</CategoryLabel>
+            <CategoryLabel>
+              <Typewriter text={group.category} duration={600} startDelay={i * 150} />
+            </CategoryLabel>
             <Grid>
               {group.items.map((item) => (
                 <Card key={item.name}>

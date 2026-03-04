@@ -35,5 +35,12 @@ export function Typewriter({
     };
   }, [text, speed, startDelay]);
 
-  return <>{text.slice(0, count)}</>;
+  return (
+    <span style={{ position: "relative", display: "inline-block" }}>
+      <span style={{ visibility: "hidden" }}>{text}</span>
+      <span style={{ position: "absolute", inset: 0 }}>
+        {text.slice(0, count)}
+      </span>
+    </span>
+  );
 }
