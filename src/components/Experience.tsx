@@ -1,4 +1,6 @@
-import styled from "styled-components";
+import { useEffect, useRef, useState } from "react";
+import styled, { css, keyframes } from "styled-components";
+import { Typewriter } from "./Typewriter";
 
 interface ExperienceItem {
   id: string;
@@ -8,6 +10,11 @@ interface ExperienceItem {
   description: string[];
   tools: string[];
 }
+
+const DELAY_BETWEEN_BULLET_POINT = 125;
+const DELAY_BETWEEN_TECH_TAG = 150;
+const DIVIDER_ANIMATION_TIME = 600;
+const TYPEWRITER_TYPING_SPEED = 25;
 
 const EXPERIENCES: ExperienceItem[] = [
   {
@@ -57,6 +64,26 @@ const EXPERIENCES: ExperienceItem[] = [
   },
 ];
 
+const expandDown = keyframes`
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+`;
+
+const fadeUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const Section = styled.section`
   padding: ${({ theme }) => `${theme.spacing[20]} 0`};
 `;
@@ -88,15 +115,11 @@ const Card = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing[5]};
   padding: ${({ theme }) => theme.spacing[1]};
-  // border: 2px solid ${({ theme }) => theme.colors.subtext1};
-  // box-shadow: 8px 8px 0 0 ${({ theme }) => theme.colors.subtext1};
 
   @media (min-width: 768px) {
     flex-direction: row;
     gap: ${({ theme }) => theme.spacing[6]};
     padding: ${({ theme }) => theme.spacing[6]};
-    // border: 4px solid ${({ theme }) => theme.colors.subtext1};
-    // box-shadow: 12px 12px 0 0 ${({ theme }) => theme.colors.subtext1};
   }
 `;
 
@@ -131,24 +154,39 @@ const Role = styled.p`
   }
 `;
 
-const Period = styled.p`
+const Period = styled.p<{ $visible: boolean; $delay: number }>`
   font-size: ${({ theme }) => theme.fontSizes.mobile.sm};
   color: ${({ theme }) => theme.colors.subtext0};
+  opacity: 0;
+
+  ${({ $visible, $delay }) =>
+    $visible &&
+    css`
+      animation: ${fadeUp} 0.4s ease ${$delay}ms forwards;
+    `}
 
   @media (min-width: 768px) {
     font-size: ${({ theme }) => theme.fontSizes.desktop.sm};
   }
 `;
 
-const Divider = styled.div`
+const Divider = styled.div<{ $visible: boolean }>`
   display: none;
   width: 2px;
   align-self: stretch;
   background-color: ${({ theme }) => theme.colors.crust};
   flex-shrink: 0;
+  transform: scaleY(0);
+  transform-origin: top;
 
   @media (min-width: 768px) {
     display: block;
+
+    ${({ $visible }) =>
+      $visible &&
+      css`
+        animation: ${expandDown} ${DIVIDER_ANIMATION_TIME / 1000}s ease forwards;
+      `}
   }
 `;
 
@@ -156,6 +194,16 @@ const CardRight = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing[4]};
+`;
+
+const BulletPoint = styled.li<{ $visible: boolean; $delay: number }>`
+  opacity: 0;
+
+  ${({ $visible, $delay }) =>
+    $visible &&
+    css`
+      animation: ${fadeUp} 0.4s ease ${$delay}ms forwards;
+    `}
 `;
 
 const DescriptionList = styled.ul`
@@ -178,16 +226,100 @@ const Tools = styled.div`
   gap: ${({ theme }) => theme.spacing[2]};
 `;
 
-const Tag = styled.span`
+const Tag = styled.span<{ $visible: boolean; $delay: number }>`
   font-size: ${({ theme }) => theme.fontSizes.mobile.sm};
   color: ${({ theme }) => theme.colors.subtext1};
   border: 1px solid ${({ theme }) => theme.colors.subtext1};
   padding: ${({ theme }) => `${theme.spacing[1]} ${theme.spacing[2]}`};
+  opacity: 0;
+
+  ${({ $visible, $delay }) =>
+    $visible &&
+    css`
+      animation: ${fadeUp} 0.4s ease ${$delay}ms forwards;
+    `}
 
   @media (min-width: 768px) {
     font-size: ${({ theme }) => theme.fontSizes.desktop.sm};
   }
 `;
+
+function useInView<T extends Element>(threshold = 0.15) {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<T>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold },
+    );
+    observer.observe(el);
+
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return [ref, visible] as const;
+}
+
+function ExperienceCard({ exp }: { exp: ExperienceItem }) {
+  const [ref, visible] = useInView<HTMLDivElement>();
+  const roleDelay = exp.company.length * TYPEWRITER_TYPING_SPEED;
+  const periodDelay = roleDelay + exp.role.length * TYPEWRITER_TYPING_SPEED;
+
+  return (
+    <Card ref={ref}>
+      <CardLeft>
+        <Company>
+          <Typewriter text={exp.company} speed={TYPEWRITER_TYPING_SPEED} />
+        </Company>
+        <Role>
+          <Typewriter
+            text={exp.role}
+            speed={TYPEWRITER_TYPING_SPEED}
+            startDelay={roleDelay}
+          />
+        </Role>
+        <Period $visible={visible} $delay={periodDelay}>
+          {exp.period}
+        </Period>
+      </CardLeft>
+      <Divider $visible={visible} />
+      <CardRight>
+        <DescriptionList>
+          {exp.description.map((point, i) => (
+            <BulletPoint
+              key={i}
+              $visible={visible}
+              $delay={i * DELAY_BETWEEN_BULLET_POINT}
+            >
+              {point}
+            </BulletPoint>
+          ))}
+        </DescriptionList>
+        <Tools>
+          {exp.tools.map((tool, i) => (
+            <Tag
+              key={tool}
+              $visible={visible}
+              $delay={DIVIDER_ANIMATION_TIME + i * DELAY_BETWEEN_TECH_TAG}
+            >
+              {tool}
+            </Tag>
+          ))}
+        </Tools>
+      </CardRight>
+    </Card>
+  );
+}
 
 function Experience() {
   return (
@@ -197,26 +329,7 @@ function Experience() {
       </Title>
       <List>
         {EXPERIENCES.map((exp) => (
-          <Card key={exp.id}>
-            <CardLeft>
-              <Company>{exp.company}</Company>
-              <Role>{exp.role}</Role>
-              <Period>{exp.period}</Period>
-            </CardLeft>
-            <Divider />
-            <CardRight>
-              <DescriptionList>
-                {exp.description.map((point, i) => (
-                  <li key={i}>{point}</li>
-                ))}
-              </DescriptionList>
-              <Tools>
-                {exp.tools.map((tool) => (
-                  <Tag key={tool}>{tool}</Tag>
-                ))}
-              </Tools>
-            </CardRight>
-          </Card>
+          <ExperienceCard key={exp.id} exp={exp} />
         ))}
       </List>
     </Section>
