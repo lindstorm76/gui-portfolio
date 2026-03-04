@@ -5,7 +5,7 @@ interface ExperienceItem {
   company: string;
   role: string;
   period: string;
-  description: string;
+  description: string[];
   tools: string[];
 }
 
@@ -15,8 +15,11 @@ const EXPERIENCES: ExperienceItem[] = [
     company: "The Able by King Power",
     role: "Senior Software Developer",
     period: "Feb 2025 – Present",
-    description:
-      "Led enterprise data migration of 150M+ records from SQL Server to PostgreSQL, orchestrating microservices with Apache Airflow and cutting migration time from days to hours through ETL optimizations. Built and maintained backend APIs using C# and .NET, implementing new endpoints and resolving issues across existing services.",
+    description: [
+      "Led enterprise-scale data migration of 150M+ records from SQL Server to PostgreSQL using Apache Airflow–orchestrated microservices.",
+      "Accelerated migration time from days to hours through ETL optimization and parallelized processing strategies.",
+      "Developed and maintained APIs using C# and .NET to support data services and system integrations.",
+    ],
     tools: [
       "Python",
       "C#",
@@ -32,8 +35,13 @@ const EXPERIENCES: ExperienceItem[] = [
     company: "PRIMO",
     role: "Software Developer",
     period: "June 2022 - Oct 2023",
-    description:
-      "Developed and maintained CRM web applications using AngularJS and NestJS, optimizing complex queries across MySQL, MongoDB, and Redis for high-performance data retrieval. Refactored AWS Lambda scripts to handle bulk data creation of up to 20,000 records — reducing execution time by 50%. Implemented a scalable QR-based payment system via third-party gateway, ensuring 100% transaction integrity. Designed reusable automation frameworks to standardize data processing workflows across teams, and built Python data pipelines and APIs for BigQuery — improving performance by 70% and automating exports to Cloud Storage.",
+    description: [
+      "Developed and maintained scalable CRM web applications using AngularJS and NestJS, ensuring high performance and reliability.",
+      "Streamlined the manual file upload and scheduled batch workflow into an API-driven AWS Lambda solution for bulk data creation (up to 20,000 records), utilizing JavaScript concurrency and chunk-based processing to cut execution time by 50%.",
+      "Built a scalable QR-based payment system via third-party payment gateway for the CRM system.",
+      "Designed reusable automation frameworks to standardize data processing workflows across development teams.",
+      "Optimized Python-based data pipelines and APIs integrated with BigQuery, improving performance by 70% and automating large-scale exports to Cloud Storage.",
+    ],
     tools: [
       "TypeScript",
       "AngularJS",
@@ -80,15 +88,16 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing[5]};
-  padding: ${({ theme }) => theme.spacing[6]};
-  border: 2px solid ${({ theme }) => theme.colors.subtext1};
-  box-shadow: 8px 8px 0 0 ${({ theme }) => theme.colors.subtext1};
+  padding: ${({ theme }) => theme.spacing[1]};
+  // border: 2px solid ${({ theme }) => theme.colors.subtext1};
+  // box-shadow: 8px 8px 0 0 ${({ theme }) => theme.colors.subtext1};
 
   @media (min-width: 768px) {
     flex-direction: row;
-    gap: ${({ theme }) => theme.spacing[8]};
-    border: 4px solid ${({ theme }) => theme.colors.subtext1};
-    box-shadow: 12px 12px 0 0 ${({ theme }) => theme.colors.subtext1};
+    gap: ${({ theme }) => theme.spacing[6]};
+    padding: ${({ theme }) => theme.spacing[6]};
+    // border: 4px solid ${({ theme }) => theme.colors.subtext1};
+    // box-shadow: 12px 12px 0 0 ${({ theme }) => theme.colors.subtext1};
   }
 `;
 
@@ -138,7 +147,7 @@ const Divider = styled.div`
   display: none;
   width: 2px;
   align-self: stretch;
-  background-color: ${({ theme }) => theme.colors.surface1};
+  background-color: ${({ theme }) => theme.colors.crust};
   flex-shrink: 0;
 
   @media (min-width: 768px) {
@@ -152,11 +161,14 @@ const CardRight = styled.div`
   gap: ${({ theme }) => theme.spacing[4]};
 `;
 
-const Description = styled.p`
+const DescriptionList = styled.ul`
   font-size: ${({ theme }) => theme.fontSizes.mobile.md};
   color: ${({ theme }) => theme.colors.subtext1};
   line-height: 1.7;
   margin: 0;
+  padding-left: ${({ theme }) => theme.spacing[5]};
+  display: flex;
+  flex-direction: column;
 
   @media (min-width: 768px) {
     font-size: ${({ theme }) => theme.fontSizes.desktop.md};
@@ -197,7 +209,11 @@ function Experience() {
             </CardLeft>
             <Divider />
             <CardRight>
-              <Description>{exp.description}</Description>
+              <DescriptionList>
+                {exp.description.map((point, i) => (
+                  <li key={i}>{point}</li>
+                ))}
+              </DescriptionList>
               <Tools>
                 {exp.tools.map((tool) => (
                   <Tag key={tool}>{tool}</Tag>
