@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
 import { Typewriter } from "./Typewriter";
+import TechTag from "./TechTag";
 
 interface ExperienceItem {
   id: string;
@@ -16,20 +17,6 @@ const DELAY_BETWEEN_TECH_TAG = 150;
 const DIVIDER_ANIMATION_TIME = 600;
 const TYPEWRITER_TYPING_SPEED = 25;
 
-const TOOL_ICONS: Record<string, string> = {
-  Python: "https://cdn.simpleicons.org/python",
-  ".NET": "https://cdn.simpleicons.org/dotnet",
-  "Apache Airflow": "https://cdn.simpleicons.org/apacheairflow",
-  PostgreSQL: "https://cdn.simpleicons.org/postgresql",
-  TypeScript: "https://cdn.simpleicons.org/typescript",
-  AngularJS: "https://cdn.simpleicons.org/angular",
-  NestJS: "https://cdn.simpleicons.org/nestjs",
-  MySQL: "https://cdn.simpleicons.org/mysql",
-  MongoDB: "https://cdn.simpleicons.org/mongodb",
-  Redis: "https://cdn.simpleicons.org/redis",
-  GCP: "https://cdn.simpleicons.org/googlecloud",
-};
-
 const EXPERIENCES: ExperienceItem[] = [
   {
     id: "the-able",
@@ -42,13 +29,13 @@ const EXPERIENCES: ExperienceItem[] = [
       "Developed and maintained APIs using C# and .NET to support data services and system integrations.",
     ],
     tools: [
-      "Python",
-      "C#",
-      ".NET",
-      "Apache Airflow",
-      "SQL Server",
-      "PostgreSQL",
-      "Oracle",
+      "python",
+      "csharp",
+      "dotnet",
+      "airflow",
+      "sqlserver",
+      "postgresql",
+      "oracle",
     ],
   },
   {
@@ -64,16 +51,16 @@ const EXPERIENCES: ExperienceItem[] = [
       "Optimized Python-based data pipelines and APIs integrated with BigQuery, improving performance by 70% and automating large-scale exports to Cloud Storage.",
     ],
     tools: [
-      "TypeScript",
-      "AngularJS",
-      "NestJS",
-      "AWS Lambda",
-      "MySQL",
-      "MongoDB",
-      "Redis",
-      "Python",
-      "Apache Airflow",
-      "GCP",
+      "typescript",
+      "angularjs",
+      "nestjs",
+      "lambda",
+      "mysql",
+      "mongodb",
+      "redis",
+      "python",
+      "airflow",
+      "gcp",
     ],
   },
 ];
@@ -240,34 +227,6 @@ const Tools = styled.div`
   gap: ${({ theme }) => theme.spacing[2]};
 `;
 
-const Tag = styled.span<{ $visible: boolean; $delay: number }>`
-  display: inline-flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing[1]};
-  font-size: ${({ theme }) => theme.fontSizes.mobile.sm};
-  color: ${({ theme }) => theme.colors.subtext1};
-  border: 1px dotted ${({ theme }) => theme.colors.subtext1};
-  padding: ${({ theme }) => `${theme.spacing[1]} ${theme.spacing[2]}`};
-  opacity: 0;
-  cursor: default;
-
-  ${({ $visible, $delay }) =>
-    $visible &&
-    css`
-      animation: ${fadeUp} 0.4s ease ${$delay}ms forwards;
-    `}
-
-  img {
-    width: 14px;
-    height: 14px;
-    object-fit: contain;
-  }
-
-  @media (min-width: 768px) {
-    font-size: ${({ theme }) => theme.fontSizes.desktop.sm};
-  }
-`;
-
 function useInView<T extends Element>(threshold = 0.15) {
   const [visible, setVisible] = useState(false);
   const ref = useRef<T>(null);
@@ -332,14 +291,12 @@ function ExperienceCard({ exp }: { exp: ExperienceItem }) {
 
         <Tools>
           {exp.tools.map((tool, index) => (
-            <Tag
+            <TechTag
               key={tool}
-              $visible={visible}
-              $delay={DIVIDER_ANIMATION_TIME + index * DELAY_BETWEEN_TECH_TAG}
-            >
-              {TOOL_ICONS[tool] && <img src={TOOL_ICONS[tool]} alt={tool} />}
-              {tool}
-            </Tag>
+              name={tool}
+              visible={visible}
+              delay={DIVIDER_ANIMATION_TIME + index * DELAY_BETWEEN_TECH_TAG}
+            />
           ))}
         </Tools>
       </CardRight>
