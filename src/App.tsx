@@ -8,6 +8,10 @@ import Contact from "./components/Contact";
 import Socials from "./components/Socials";
 import Email from "./components/Email";
 
+const Container = styled.div`
+  background-color: ${({ theme }) => theme.colors.base};
+`;
+
 const Main = styled.main`
   max-width: 1280px;
   margin: 0 auto;
@@ -22,7 +26,7 @@ const Main = styled.main`
 
 function App() {
   return (
-    <>
+    <Container>
       <Navbar />
       <Main>
         <Hero />
@@ -33,7 +37,7 @@ function App() {
       </Main>
       <Socials />
       <Email />
-    </>
+    </Container>
   );
 }
 

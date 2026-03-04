@@ -1,5 +1,17 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+import { Typewriter } from "./Typewriter";
+
+const fadeDown = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const NAV_LINKS = [
   { label: "About", href: "#" },
@@ -15,13 +27,18 @@ const Nav = styled.nav<{ $scrolled: boolean }>`
   left: 0;
   right: 0;
   z-index: 200;
-  background-color: ${({ theme }) => theme.colors.base}80;
-  backdrop-filter: saturate(180%) blur(12px);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid
-    ${({ theme, $scrolled }) =>
-      $scrolled ? theme.colors.surface0 : "transparent"};
-  transition: border-color 0.2s ease;
+  background-color: ${({ theme, $scrolled }) =>
+    $scrolled ? `${theme.colors.base}80` : "transparent"};
+  backdrop-filter: ${({ $scrolled }) =>
+    $scrolled ? "saturate(180%) blur(12px)" : "none"};
+  -webkit-backdrop-filter: ${({ $scrolled }) =>
+    $scrolled ? "saturate(180%) blur(12px)" : "none"};
+  box-shadow: ${({ theme, $scrolled }) =>
+    $scrolled ? `inset 0 -1px 0 0 ${theme.colors.surface0}` : "none"};
+  transition:
+    background-color 0.4s ease,
+    backdrop-filter 0.4s ease,
+    box-shadow 0.4s ease;
 `;
 
 const Inner = styled.div`
@@ -35,7 +52,7 @@ const Inner = styled.div`
   }
 `;
 
-const Brand = styled.p`
+const Name = styled.p`
   cursor: default;
   font-size: ${({ theme }) => theme.fontSizes.mobile.lg};
   font-weight: 700;
@@ -147,6 +164,19 @@ const DesktopLinks = styled.ul`
   @media (max-height: 500px) {
     gap: ${({ theme }) => theme.spacing[1]};
   }
+
+  li {
+    opacity: 0;
+    animation: ${fadeDown} 0.4s ease forwards;
+  }
+
+  ${NAV_LINKS.map(
+    (_, i) => css`
+      li:nth-child(${i + 1}) {
+        animation-delay: ${i * 250}ms;
+      }
+    `,
+  )}
 `;
 
 const NavLink = styled.a`
@@ -197,7 +227,9 @@ function Navbar() {
     <>
       <Nav $scrolled={scrolled}>
         <Inner>
-          <Brand>thanapong.dev</Brand>
+          <Name>
+            <Typewriter text="thanapong.dev" />
+          </Name>
           <HamburgerButton
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? "Close menu" : "Open menu"}
