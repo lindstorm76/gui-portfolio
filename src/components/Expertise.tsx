@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { useEffect, useRef, useState } from "react";
+import styled, { css, keyframes } from "styled-components";
 import { Typewriter } from "./Typewriter";
 
 interface StackItem {
@@ -11,6 +12,8 @@ interface StackGroup {
   category: string;
   items: StackItem[];
 }
+
+const TECH_STACK_CARD_DELAY = 175;
 
 const STACKS: StackGroup[] = [
   {
@@ -92,6 +95,43 @@ const STACKS: StackGroup[] = [
   },
 ];
 
+function useInView<T extends Element>(threshold = 0.15) {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<T>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold },
+    );
+    observer.observe(el);
+
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return [ref, visible] as const;
+}
+
+const fadeUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const Section = styled.section`
   padding: ${({ theme }) => `${theme.spacing[20]} 0`};
 `;
@@ -148,7 +188,7 @@ const Grid = styled.div`
   }
 `;
 
-const Card = styled.div`
+const Card = styled.div<{ $delay: number; $visible: boolean }>`
   display: grid;
   grid-template-columns: 36px 1fr;
   gap: ${({ theme }) => theme.spacing[3]};
@@ -158,6 +198,13 @@ const Card = styled.div`
   border-radius: 0;
   cursor: default;
   transition: border-color 0.1s ease;
+  opacity: 0;
+
+  ${({ $visible, $delay }) =>
+    $visible &&
+    css`
+      animation: ${fadeUp} 0.4s ease ${$delay}ms forwards;
+    `}
 `;
 
 const IconArea = styled.div`
@@ -193,6 +240,40 @@ const Name = styled.span`
   color: ${({ theme }) => theme.colors.subtext1};
 `;
 
+function StackGroupSection({ group }: { group: StackGroup }) {
+  const [ref, visible] = useInView<HTMLDivElement>();
+
+  const getRandomTypeSpeed = () => {
+    return Math.floor(Math.random() * (55 - 45 + 1)) + 45;
+  };
+
+  return (
+    <CategoryGroup ref={ref}>
+      <CategoryLabel>
+        <Typewriter text={group.category} speed={getRandomTypeSpeed()} />
+      </CategoryLabel>
+      <Grid>
+        {group.items.map((item, i) => (
+          <Card
+            key={item.name}
+            $delay={i * TECH_STACK_CARD_DELAY}
+            $visible={visible}
+          >
+            <IconArea>
+              {item.icon ? (
+                <img src={item.icon} alt={item.name} width={36} height={36} />
+              ) : (
+                <AbbrBox>{item.abbr}</AbbrBox>
+              )}
+            </IconArea>
+            <Name>{item.name}</Name>
+          </Card>
+        ))}
+      </Grid>
+    </CategoryGroup>
+  );
+}
+
 function Stack() {
   return (
     <Section id="expertise">
@@ -200,31 +281,8 @@ function Stack() {
         <Highlight>02.</Highlight> My Expertise
       </Title>
       <Groups>
-        {STACKS.map((group, i) => (
-          <CategoryGroup key={group.category}>
-            <CategoryLabel>
-              <Typewriter text={group.category} duration={600} startDelay={i * 150} />
-            </CategoryLabel>
-            <Grid>
-              {group.items.map((item) => (
-                <Card key={item.name}>
-                  <IconArea>
-                    {item.icon ? (
-                      <img
-                        src={item.icon}
-                        alt={item.name}
-                        width={36}
-                        height={36}
-                      />
-                    ) : (
-                      <AbbrBox>{item.abbr}</AbbrBox>
-                    )}
-                  </IconArea>
-                  <Name>{item.name}</Name>
-                </Card>
-              ))}
-            </Grid>
-          </CategoryGroup>
+        {STACKS.map((group) => (
+          <StackGroupSection key={group.category} group={group} />
         ))}
       </Groups>
     </Section>
