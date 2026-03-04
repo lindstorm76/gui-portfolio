@@ -181,9 +181,8 @@ const DesktopLinks = styled.ul`
 
 const NavLink = styled.a`
   display: block;
-  padding: ${({ theme }) => `${theme.spacing[1]} ${theme.spacing[3]}`};
+  padding: ${({ theme }) => `${theme.spacing[1]} ${theme.spacing[2]}`};
   color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.fontSizes.mobile.sm};
   border: 1px solid transparent;
 
   transition:
@@ -198,7 +197,7 @@ const NavLink = styled.a`
   }
 
   @media (min-width: 768px) {
-    font-size: ${({ theme }) => theme.fontSizes.desktop.sm};
+    font-size: ${({ theme }) => theme.fontSizes.desktop.md};
   }
 `;
 
