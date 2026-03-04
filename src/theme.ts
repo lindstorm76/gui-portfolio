@@ -31,7 +31,7 @@ const theme = {
     crust: "#dce0e8",
   },
   fonts: {
-    sans: "'Space Grotesk', system-ui, Avenir, Helvetica, Arial, sans-serif",
+    sans: "system-ui, Avenir, Helvetica, Arial, sans-serif",
     mono: "'Space Mono', system-ui, Avenir, Helvetica, Arial, sans-serif",
   },
   fontSizes: {

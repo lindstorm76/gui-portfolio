@@ -96,7 +96,6 @@ const Section = styled.section`
 `;
 
 const Title = styled.h2`
-  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile["3xl"]};
   color: ${({ theme }) => theme.colors.text};
   font-weight: 700;
@@ -125,7 +124,6 @@ const CategoryGroup = styled.div`
 `;
 
 const CategoryLabel = styled.h3`
-  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile.md};
   color: ${({ theme }) => theme.colors.text};
   letter-spacing: 0.08em;
@@ -182,7 +180,6 @@ const AbbrBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: 10px;
   font-weight: 600;
   color: #000;

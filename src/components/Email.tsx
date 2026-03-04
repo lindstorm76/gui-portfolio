@@ -29,7 +29,6 @@ const Line = styled.div`
 const EmailLink = styled.a`
   color: ${({ theme }) => theme.colors.text};
   font-size: ${({ theme }) => theme.fontSizes.mobile.xs};
-  font-family: ${({ theme }) => theme.fonts.mono};
   letter-spacing: 0.1em;
   writing-mode: vertical-rl;
   transition: all 0.3s ease;

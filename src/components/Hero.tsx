@@ -17,7 +17,6 @@ const Section = styled.section`
 `;
 
 const Name = styled.h1`
-  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: clamp(3rem, 8vw, 8rem);
   color: ${({ theme }) => theme.colors.text};
   font-weight: 700;
@@ -25,7 +24,6 @@ const Name = styled.h1`
 `;
 
 const Role = styled.p`
-  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: clamp(1.5rem, 3vw, 3rem);
   color: ${({ theme }) => theme.colors.lavender};
   font-weight: 700;

@@ -62,7 +62,6 @@ const Section = styled.section`
 `;
 
 const Title = styled.h2`
-  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile["3xl"]};
   color: ${({ theme }) => theme.colors.text};
   font-weight: 700;
@@ -113,7 +112,6 @@ const CardLeft = styled.div`
 `;
 
 const Company = styled.h3`
-  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile["xl"]};
   font-weight: 700;
   color: ${({ theme }) => theme.colors.text};
@@ -124,7 +122,6 @@ const Company = styled.h3`
 `;
 
 const Role = styled.p`
-  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile.lg};
   color: ${({ theme }) => theme.colors.lavender};
   font-weight: 600;
@@ -182,7 +179,6 @@ const Tools = styled.div`
 `;
 
 const Tag = styled.span`
-  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile.sm};
   color: ${({ theme }) => theme.colors.subtext1};
   border: 1px solid ${({ theme }) => theme.colors.subtext1};

@@ -16,7 +16,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: ${({ theme }) => theme.fonts.sans};
+    font-family: ${({ theme }) => theme.fonts.mono};
     font-size: ${({ theme }) => theme.fontSizes.mobile.md};
 
     @media (min-width: 768px) {

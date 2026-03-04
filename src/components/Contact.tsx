@@ -22,7 +22,6 @@ const Highlight = styled.span`
 `;
 
 const Title = styled.h2`
-  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile["3xl"]};
   font-weight: 700;
   text-align: center;
@@ -60,7 +59,6 @@ const Message = styled.p`
 const Button = styled.a`
   display: inline-block;
   padding: ${({ theme }) => `${theme.spacing[3]} ${theme.spacing[8]}`};
-  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.mobile.sm};
   font-weight: 700;
   color: ${({ theme }) => theme.colors.text};
