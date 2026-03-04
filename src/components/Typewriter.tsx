@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function Typewriter({
   text,
@@ -10,8 +10,28 @@ export function Typewriter({
   startDelay?: number;
 }) {
   const [count, setCount] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+
     let timeout: ReturnType<typeof setTimeout>;
     let interval: ReturnType<typeof setInterval>;
 
@@ -20,10 +40,8 @@ export function Typewriter({
         setCount((count) => {
           if (count >= text.length) {
             clearInterval(interval);
-
             return count;
           }
-
           return count + 1;
         });
       }, speed);
@@ -33,10 +51,10 @@ export function Typewriter({
       clearTimeout(timeout);
       clearInterval(interval);
     };
-  }, [text, speed, startDelay]);
+  }, [visible, text, speed, startDelay]);
 
   return (
-    <span style={{ position: "relative", display: "inline-block" }}>
+    <span ref={ref} style={{ position: "relative", display: "inline-block" }}>
       <span style={{ visibility: "hidden" }}>{text}</span>
       <span style={{ position: "absolute", inset: 0 }}>
         {text.slice(0, count)}
