@@ -17,49 +17,49 @@ const STACKS: StackGroup[] = [
     items: [
       {
         name: "TypeScript",
-        icon: `https://cdn.simpleicons.org/typescript/000000`,
+        icon: `https://cdn.simpleicons.org/typescript/4c4f69`,
       },
       {
         name: "JavaScript",
-        icon: `https://cdn.simpleicons.org/javascript/000000`,
+        icon: `https://cdn.simpleicons.org/javascript/4c4f69`,
       },
-      { name: "Go", icon: `https://cdn.simpleicons.org/go/000000` },
-      { name: "Python", icon: `https://cdn.simpleicons.org/python/000000` },
-      { name: "Dart", icon: `https://cdn.simpleicons.org/dart/000000` },
+      { name: "Go", icon: `https://cdn.simpleicons.org/go/4c4f69` },
+      { name: "Python", icon: `https://cdn.simpleicons.org/python/4c4f69` },
+      { name: "Dart", icon: `https://cdn.simpleicons.org/dart/4c4f69` },
     ],
   },
   {
     category: "Frontend",
     items: [
-      { name: "React", icon: `https://cdn.simpleicons.org/react/000000` },
-      { name: "Vue.js", icon: `https://cdn.simpleicons.org/vuedotjs/000000` },
+      { name: "React", icon: `https://cdn.simpleicons.org/react/4c4f69` },
+      { name: "Vue.js", icon: `https://cdn.simpleicons.org/vuedotjs/4c4f69` },
       {
         name: "AngularJS",
-        icon: `https://cdn.simpleicons.org/angular/000000`,
+        icon: `https://cdn.simpleicons.org/angular/4c4f69`,
       },
     ],
   },
   {
     category: "Backend/APIs",
     items: [
-      { name: "Node.js", icon: `https://cdn.simpleicons.org/nodedotjs/000000` },
-      { name: "NestJS", icon: `https://cdn.simpleicons.org/nestjs/000000` },
+      { name: "Node.js", icon: `https://cdn.simpleicons.org/nodedotjs/4c4f69` },
+      { name: "NestJS", icon: `https://cdn.simpleicons.org/nestjs/4c4f69` },
       {
         name: "Express.js",
-        icon: `https://cdn.simpleicons.org/express/000000`,
+        icon: `https://cdn.simpleicons.org/express/4c4f69`,
       },
       { name: "gRPC", abbr: "gRPC" },
-      { name: "GraphQL", icon: `https://cdn.simpleicons.org/graphql/000000` },
+      { name: "GraphQL", icon: `https://cdn.simpleicons.org/graphql/4c4f69` },
       { name: "REST", abbr: "REST" },
     ],
   },
   {
     category: "Mobile",
     items: [
-      { name: "Flutter", icon: `https://cdn.simpleicons.org/flutter/000000` },
+      { name: "Flutter", icon: `https://cdn.simpleicons.org/flutter/4c4f69` },
       {
         name: "React Native",
-        icon: `https://cdn.simpleicons.org/react/000000`,
+        icon: `https://cdn.simpleicons.org/react/4c4f69`,
       },
     ],
   },
@@ -68,11 +68,11 @@ const STACKS: StackGroup[] = [
     items: [
       {
         name: "Apache Airflow",
-        icon: `https://cdn.simpleicons.org/apacheairflow/000000`,
+        icon: `https://cdn.simpleicons.org/apacheairflow/4c4f69`,
       },
       { name: "AWS", abbr: "AWS" },
-      { name: "GCP", icon: `https://cdn.simpleicons.org/googlecloud/000000` },
-      { name: "Docker", icon: `https://cdn.simpleicons.org/docker/000000` },
+      { name: "GCP", icon: `https://cdn.simpleicons.org/googlecloud/4c4f69` },
+      { name: "Docker", icon: `https://cdn.simpleicons.org/docker/4c4f69` },
     ],
   },
   {
@@ -80,13 +80,13 @@ const STACKS: StackGroup[] = [
     items: [
       {
         name: "PostgreSQL",
-        icon: `https://cdn.simpleicons.org/postgresql/000000`,
+        icon: `https://cdn.simpleicons.org/postgresql/4c4f69`,
       },
       { name: "SQL Server", abbr: "MSSQL" },
       { name: "Oracle", abbr: "ORA" },
-      { name: "MySQL", icon: `https://cdn.simpleicons.org/mysql/000000` },
-      { name: "MongoDB", icon: `https://cdn.simpleicons.org/mongodb/000000` },
-      { name: "Redis", icon: `https://cdn.simpleicons.org/redis/000000` },
+      { name: "MySQL", icon: `https://cdn.simpleicons.org/mysql/4c4f69` },
+      { name: "MongoDB", icon: `https://cdn.simpleicons.org/mongodb/4c4f69` },
+      { name: "Redis", icon: `https://cdn.simpleicons.org/redis/4c4f69` },
     ],
   },
 ];
@@ -189,7 +189,7 @@ const AbbrBox = styled.div`
 const Name = styled.span`
   font-weight: 600;
   font-size: ${({ theme }) => theme.fontSizes.mobile.md};
-  color: #000;
+  color: ${({ theme }) => theme.colors.subtext1};
 `;
 
 function Stack() {

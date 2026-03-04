@@ -166,7 +166,7 @@ const ProjectName = styled.h3`
 `;
 
 const Desc = styled.p<{ $reverse: boolean }>`
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.subtext1};
   font-size: ${({ theme }) => theme.fontSizes.mobile.md};
   line-height: 1.7;
   text-align: left;
